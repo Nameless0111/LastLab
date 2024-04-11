@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b437c9829dd04331a8a55e07f5c3b5ee" Name="Diagram1">
+        <EntityTypeShape EntityType="METROModel.AccessRank" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="METROModel.Category" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="METROModel.Cheque" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="METROModel.Cost" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="METROModel.Customer" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="METROModel.Product" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="METROModel.Purchase" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="METROModel.Sitizenship" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="METROModel.Trader" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="METROModel.TypeOfInterraction" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <AssociationConnector Association="METROModel.FK__Customer__Access__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="METROModel.FK__Trader__AccessRa__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="METROModel.FK__Product__Categor__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="METROModel.FK__Cheque__Customer__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="METROModel.FK__Cheque__Purchase__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="METROModel.FK__Cheque__TypeOfIn__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="METROModel.FK__Purchase__Cost_I__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="METROModel.FK__Customer__Sitize__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="METROModel.FK__Purchase__Produc__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="METROModel.FK__Purchase__Trader__4CA06362" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

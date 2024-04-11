@@ -1,0 +1,710 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище METROModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccessRank">
+          <Key>
+            <PropertyRef Name="ID_AccessRank" />
+          </Key>
+          <Property Name="ID_AccessRank" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rank" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID_Category" />
+          </Key>
+          <Property Name="ID_Category" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cheque">
+          <Key>
+            <PropertyRef Name="ID_Cheque" />
+          </Key>
+          <Property Name="ID_Cheque" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Purchase_ID" Type="int" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="TypeOfInterraction_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cost">
+          <Key>
+            <PropertyRef Name="ID_Cost" />
+          </Key>
+          <Property Name="ID_Cost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cost" Type="int" Nullable="false" />
+          <Property Name="Discount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID_Customer" />
+          </Key>
+          <Property Name="ID_Customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Sitizenship_ID" Type="int" Nullable="false" />
+          <Property Name="AccessRank_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Category_ID" Type="int" Nullable="false" />
+          <Property Name="ParticularPrice" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="ID_Purchase" />
+          </Key>
+          <Property Name="ID_Purchase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_ID" Type="int" Nullable="false" />
+          <Property Name="Cost_ID" Type="int" Nullable="false" />
+          <Property Name="Trader_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sitizenship">
+          <Key>
+            <PropertyRef Name="ID_Sitizenship" />
+          </Key>
+          <Property Name="ID_Sitizenship" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sitizenship" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Privilege" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trader">
+          <Key>
+            <PropertyRef Name="ID_Trader" />
+          </Key>
+          <Property Name="ID_Trader" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="AccessRank_ID" Type="int" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfInterraction">
+          <Key>
+            <PropertyRef Name="ID_TypeOfInterraction" />
+          </Key>
+          <Property Name="ID_TypeOfInterraction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Cheque__Customer__5070F446">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID_Customer" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cheque__Purchase__4F7CD00D">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="ID_Purchase" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="Purchase_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cheque__TypeOfIn__5165187F">
+          <End Role="TypeOfInterraction" Type="Self.TypeOfInterraction" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfInterraction">
+              <PropertyRef Name="ID_TypeOfInterraction" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="TypeOfInterraction_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__Access__3E52440B">
+          <End Role="AccessRank" Type="Self.AccessRank" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessRank">
+              <PropertyRef Name="ID_AccessRank" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="AccessRank_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__Sitize__3D5E1FD2">
+          <End Role="Sitizenship" Type="Self.Sitizenship" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sitizenship">
+              <PropertyRef Name="ID_Sitizenship" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Sitizenship_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Categor__47DBAE45">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID_Category" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Purchase__Cost_I__4BAC3F29">
+          <End Role="Cost" Type="Self.Cost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cost">
+              <PropertyRef Name="ID_Cost" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="Cost_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Purchase__Produc__4AB81AF0">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_Product" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Purchase__Trader__4CA06362">
+          <End Role="Trader" Type="Self.Trader" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trader">
+              <PropertyRef Name="ID_Trader" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="Trader_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trader__AccessRa__412EB0B6">
+          <End Role="AccessRank" Type="Self.AccessRank" Multiplicity="1" />
+          <End Role="Trader" Type="Self.Trader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessRank">
+              <PropertyRef Name="ID_AccessRank" />
+            </Principal>
+            <Dependent Role="Trader">
+              <PropertyRef Name="AccessRank_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище METROModelContainer">
+          <EntitySet Name="AccessRank" EntityType="Self.AccessRank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cheque" EntityType="Self.Cheque" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cost" EntityType="Self.Cost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sitizenship" EntityType="Self.Sitizenship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trader" EntityType="Self.Trader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfInterraction" EntityType="Self.TypeOfInterraction" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cheque__Customer__5070F446" Association="Self.FK__Cheque__Customer__5070F446">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Cheque" EntitySet="Cheque" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cheque__Purchase__4F7CD00D" Association="Self.FK__Cheque__Purchase__4F7CD00D">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="Cheque" EntitySet="Cheque" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cheque__TypeOfIn__5165187F" Association="Self.FK__Cheque__TypeOfIn__5165187F">
+            <End Role="TypeOfInterraction" EntitySet="TypeOfInterraction" />
+            <End Role="Cheque" EntitySet="Cheque" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__Access__3E52440B" Association="Self.FK__Customer__Access__3E52440B">
+            <End Role="AccessRank" EntitySet="AccessRank" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__Sitize__3D5E1FD2" Association="Self.FK__Customer__Sitize__3D5E1FD2">
+            <End Role="Sitizenship" EntitySet="Sitizenship" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Categor__47DBAE45" Association="Self.FK__Product__Categor__47DBAE45">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__Cost_I__4BAC3F29" Association="Self.FK__Purchase__Cost_I__4BAC3F29">
+            <End Role="Cost" EntitySet="Cost" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__Produc__4AB81AF0" Association="Self.FK__Purchase__Produc__4AB81AF0">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__Trader__4CA06362" Association="Self.FK__Purchase__Trader__4CA06362">
+            <End Role="Trader" EntitySet="Trader" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trader__AccessRa__412EB0B6" Association="Self.FK__Trader__AccessRa__412EB0B6">
+            <End Role="AccessRank" EntitySet="AccessRank" />
+            <End Role="Trader" EntitySet="Trader" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="METROModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccessRank">
+          <Key>
+            <PropertyRef Name="ID_AccessRank" />
+          </Key>
+          <Property Name="ID_AccessRank" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rank" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Customer__Access__3E52440B" FromRole="AccessRank" ToRole="Customer" />
+          <NavigationProperty Name="Trader" Relationship="Self.FK__Trader__AccessRa__412EB0B6" FromRole="AccessRank" ToRole="Trader" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID_Category" />
+          </Key>
+          <Property Name="ID_Category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Categor__47DBAE45" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Cheque">
+          <Key>
+            <PropertyRef Name="ID_Cheque" />
+          </Key>
+          <Property Name="ID_Cheque" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Purchase_ID" Type="Int32" Nullable="false" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="TypeOfInterraction_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Cheque__Customer__5070F446" FromRole="Cheque" ToRole="Customer" />
+          <NavigationProperty Name="Purchase" Relationship="Self.FK__Cheque__Purchase__4F7CD00D" FromRole="Cheque" ToRole="Purchase" />
+          <NavigationProperty Name="TypeOfInterraction" Relationship="Self.FK__Cheque__TypeOfIn__5165187F" FromRole="Cheque" ToRole="TypeOfInterraction" />
+        </EntityType>
+        <EntityType Name="Cost">
+          <Key>
+            <PropertyRef Name="ID_Cost" />
+          </Key>
+          <Property Name="ID_Cost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cost1" Type="Int32" Nullable="false" />
+          <Property Name="Discount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Purchase" Relationship="Self.FK__Purchase__Cost_I__4BAC3F29" FromRole="Cost" ToRole="Purchase" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID_Customer" />
+          </Key>
+          <Property Name="ID_Customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sitizenship_ID" Type="Int32" Nullable="false" />
+          <Property Name="AccessRank_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccessRank" Relationship="Self.FK__Customer__Access__3E52440B" FromRole="Customer" ToRole="AccessRank" />
+          <NavigationProperty Name="Cheque" Relationship="Self.FK__Cheque__Customer__5070F446" FromRole="Customer" ToRole="Cheque" />
+          <NavigationProperty Name="Sitizenship" Relationship="Self.FK__Customer__Sitize__3D5E1FD2" FromRole="Customer" ToRole="Sitizenship" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Category_ID" Type="Int32" Nullable="false" />
+          <Property Name="ParticularPrice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__47DBAE45" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Purchase" Relationship="Self.FK__Purchase__Produc__4AB81AF0" FromRole="Product" ToRole="Purchase" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="ID_Purchase" />
+          </Key>
+          <Property Name="ID_Purchase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_ID" Type="Int32" Nullable="false" />
+          <Property Name="Cost_ID" Type="Int32" Nullable="false" />
+          <Property Name="Trader_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cheque" Relationship="Self.FK__Cheque__Purchase__4F7CD00D" FromRole="Purchase" ToRole="Cheque" />
+          <NavigationProperty Name="Cost" Relationship="Self.FK__Purchase__Cost_I__4BAC3F29" FromRole="Purchase" ToRole="Cost" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Purchase__Produc__4AB81AF0" FromRole="Purchase" ToRole="Product" />
+          <NavigationProperty Name="Trader" Relationship="Self.FK__Purchase__Trader__4CA06362" FromRole="Purchase" ToRole="Trader" />
+        </EntityType>
+        <EntityType Name="Sitizenship">
+          <Key>
+            <PropertyRef Name="ID_Sitizenship" />
+          </Key>
+          <Property Name="ID_Sitizenship" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sitizenship1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Privilege" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Customer__Sitize__3D5E1FD2" FromRole="Sitizenship" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Trader">
+          <Key>
+            <PropertyRef Name="ID_Trader" />
+          </Key>
+          <Property Name="ID_Trader" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AccessRank_ID" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AccessRank" Relationship="Self.FK__Trader__AccessRa__412EB0B6" FromRole="Trader" ToRole="AccessRank" />
+          <NavigationProperty Name="Purchase" Relationship="Self.FK__Purchase__Trader__4CA06362" FromRole="Trader" ToRole="Purchase" />
+        </EntityType>
+        <EntityType Name="TypeOfInterraction">
+          <Key>
+            <PropertyRef Name="ID_TypeOfInterraction" />
+          </Key>
+          <Property Name="ID_TypeOfInterraction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cheque" Relationship="Self.FK__Cheque__TypeOfIn__5165187F" FromRole="TypeOfInterraction" ToRole="Cheque" />
+        </EntityType>
+        <Association Name="FK__Customer__Access__3E52440B">
+          <End Role="AccessRank" Type="Self.AccessRank" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessRank">
+              <PropertyRef Name="ID_AccessRank" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="AccessRank_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trader__AccessRa__412EB0B6">
+          <End Role="AccessRank" Type="Self.AccessRank" Multiplicity="1" />
+          <End Role="Trader" Type="Self.Trader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessRank">
+              <PropertyRef Name="ID_AccessRank" />
+            </Principal>
+            <Dependent Role="Trader">
+              <PropertyRef Name="AccessRank_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Categor__47DBAE45">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID_Category" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cheque__Customer__5070F446">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID_Customer" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cheque__Purchase__4F7CD00D">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="ID_Purchase" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="Purchase_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cheque__TypeOfIn__5165187F">
+          <End Role="TypeOfInterraction" Type="Self.TypeOfInterraction" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfInterraction">
+              <PropertyRef Name="ID_TypeOfInterraction" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="TypeOfInterraction_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Purchase__Cost_I__4BAC3F29">
+          <End Role="Cost" Type="Self.Cost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cost">
+              <PropertyRef Name="ID_Cost" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="Cost_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__Sitize__3D5E1FD2">
+          <End Role="Sitizenship" Type="Self.Sitizenship" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sitizenship">
+              <PropertyRef Name="ID_Sitizenship" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Sitizenship_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Purchase__Produc__4AB81AF0">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_Product" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Purchase__Trader__4CA06362">
+          <End Role="Trader" Type="Self.Trader" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trader">
+              <PropertyRef Name="ID_Trader" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="Trader_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="METROEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccessRank" EntityType="Self.AccessRank" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Cheque" EntityType="Self.Cheque" />
+          <EntitySet Name="Cost" EntityType="Self.Cost" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Purchase" EntityType="Self.Purchase" />
+          <EntitySet Name="Sitizenship" EntityType="Self.Sitizenship" />
+          <EntitySet Name="Trader" EntityType="Self.Trader" />
+          <EntitySet Name="TypeOfInterraction" EntityType="Self.TypeOfInterraction" />
+          <AssociationSet Name="FK__Customer__Access__3E52440B" Association="Self.FK__Customer__Access__3E52440B">
+            <End Role="AccessRank" EntitySet="AccessRank" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trader__AccessRa__412EB0B6" Association="Self.FK__Trader__AccessRa__412EB0B6">
+            <End Role="AccessRank" EntitySet="AccessRank" />
+            <End Role="Trader" EntitySet="Trader" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Categor__47DBAE45" Association="Self.FK__Product__Categor__47DBAE45">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cheque__Customer__5070F446" Association="Self.FK__Cheque__Customer__5070F446">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Cheque" EntitySet="Cheque" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cheque__Purchase__4F7CD00D" Association="Self.FK__Cheque__Purchase__4F7CD00D">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="Cheque" EntitySet="Cheque" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cheque__TypeOfIn__5165187F" Association="Self.FK__Cheque__TypeOfIn__5165187F">
+            <End Role="TypeOfInterraction" EntitySet="TypeOfInterraction" />
+            <End Role="Cheque" EntitySet="Cheque" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__Cost_I__4BAC3F29" Association="Self.FK__Purchase__Cost_I__4BAC3F29">
+            <End Role="Cost" EntitySet="Cost" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__Sitize__3D5E1FD2" Association="Self.FK__Customer__Sitize__3D5E1FD2">
+            <End Role="Sitizenship" EntitySet="Sitizenship" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__Produc__4AB81AF0" Association="Self.FK__Purchase__Produc__4AB81AF0">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__Trader__4CA06362" Association="Self.FK__Purchase__Trader__4CA06362">
+            <End Role="Trader" EntitySet="Trader" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище METROModelContainer" CdmEntityContainer="METROEntities">
+          <EntitySetMapping Name="AccessRank">
+            <EntityTypeMapping TypeName="METROModel.AccessRank">
+              <MappingFragment StoreEntitySet="AccessRank">
+                <ScalarProperty Name="ID_AccessRank" ColumnName="ID_AccessRank" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="METROModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
+                <ScalarProperty Name="Category1" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cheque">
+            <EntityTypeMapping TypeName="METROModel.Cheque">
+              <MappingFragment StoreEntitySet="Cheque">
+                <ScalarProperty Name="ID_Cheque" ColumnName="ID_Cheque" />
+                <ScalarProperty Name="Purchase_ID" ColumnName="Purchase_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="TypeOfInterraction_ID" ColumnName="TypeOfInterraction_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cost">
+            <EntityTypeMapping TypeName="METROModel.Cost">
+              <MappingFragment StoreEntitySet="Cost">
+                <ScalarProperty Name="ID_Cost" ColumnName="ID_Cost" />
+                <ScalarProperty Name="Cost1" ColumnName="Cost" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="METROModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Sitizenship_ID" ColumnName="Sitizenship_ID" />
+                <ScalarProperty Name="AccessRank_ID" ColumnName="AccessRank_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="METROModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="ParticularPrice" ColumnName="ParticularPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchase">
+            <EntityTypeMapping TypeName="METROModel.Purchase">
+              <MappingFragment StoreEntitySet="Purchase">
+                <ScalarProperty Name="ID_Purchase" ColumnName="ID_Purchase" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Cost_ID" ColumnName="Cost_ID" />
+                <ScalarProperty Name="Trader_ID" ColumnName="Trader_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sitizenship">
+            <EntityTypeMapping TypeName="METROModel.Sitizenship">
+              <MappingFragment StoreEntitySet="Sitizenship">
+                <ScalarProperty Name="ID_Sitizenship" ColumnName="ID_Sitizenship" />
+                <ScalarProperty Name="Sitizenship1" ColumnName="Sitizenship" />
+                <ScalarProperty Name="Privilege" ColumnName="Privilege" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trader">
+            <EntityTypeMapping TypeName="METROModel.Trader">
+              <MappingFragment StoreEntitySet="Trader">
+                <ScalarProperty Name="ID_Trader" ColumnName="ID_Trader" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="AccessRank_ID" ColumnName="AccessRank_ID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfInterraction">
+            <EntityTypeMapping TypeName="METROModel.TypeOfInterraction">
+              <MappingFragment StoreEntitySet="TypeOfInterraction">
+                <ScalarProperty Name="ID_TypeOfInterraction" ColumnName="ID_TypeOfInterraction" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
